@@ -62,6 +62,7 @@ Board.prototype._moveVertical = function(direction) {
 	var startY = 1;
 	var incrementY = 1;
 	var defaultLastY = 0;
+	var points = 0;
 
 	if (direction === Direction.DOWN) {
 		startY = 2;
@@ -87,6 +88,7 @@ Board.prototype._moveVertical = function(direction) {
 				this._put(x, y, 0, newValues);
 			}
 			else if (val === compare) {
+				points += val + val;
 				this._put(x, lastY, val + val, newValues);
 				this._put(x, y, 0, newValues);
 				lastY += incrementY;
@@ -98,7 +100,10 @@ Board.prototype._moveVertical = function(direction) {
 		}
 	}
 
-	return this._createFromArray(newValues);
+	return {
+		board: this._createFromArray(newValues),
+		points: points
+	};
 };
 
 Board.prototype._moveHorizontal = function(direction) {
@@ -107,6 +112,7 @@ Board.prototype._moveHorizontal = function(direction) {
 	var startX = 1;
 	var incrementX = 1;
 	var defaultLastX = 0;
+	var points = 0;
 
 	if (direction === Direction.RIGHT) {
 		startX = 2;
@@ -132,6 +138,7 @@ Board.prototype._moveHorizontal = function(direction) {
 				this._put(x, y, 0, newValues);
 			}
 			else if (val === compare) {
+				points += val + val;
 				this._put(lastX, y, val + val, newValues);
 				this._put(x, y, 0, newValues);
 				lastX += incrementX;
@@ -143,7 +150,10 @@ Board.prototype._moveHorizontal = function(direction) {
 		}
 	}
 
-	return this._createFromArray(newValues);
+	return {
+		board: this._createFromArray(newValues),
+		points: points
+	};
 };
 
 module.exports = Board;

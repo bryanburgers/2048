@@ -67,7 +67,7 @@ describe('board', function() {
 			 0, 0, 0, 0,
 			 0, 0, 0, 0]);
 
-		boardsEqual(source.move(Direction.UP), destination);
+		boardsEqual(source.move(Direction.UP).board, destination);
 	});
 
 	it('handles UP properly (combinations).', function() {
@@ -83,7 +83,23 @@ describe('board', function() {
 			 0, 2, 0, 0,
 			 0, 0, 0, 0]);
 
-		boardsEqual(source.move(Direction.UP), destination);
+		boardsEqual(source.move(Direction.UP).board, destination);
+	});
+
+	it('handles UP properly (points).', function() {
+		var source = Board.fromArray(
+			[2, 0, 2, 0,
+			 2, 2, 0, 0,
+			 2, 4, 0, 2,
+			 2, 2, 2, 0]);
+
+		var destination = Board.fromArray(
+			[4, 2, 4, 2,
+			 4, 4, 0, 0,
+			 0, 2, 0, 0,
+			 0, 0, 0, 0]);
+
+		assert(source.move(Direction.UP).points === 12, "Points are calculated correctly.");
 	});
 
 	it('handles UP properly (2, 4, 0, 2).', function() {
@@ -99,7 +115,7 @@ describe('board', function() {
 			 2, 0, 0, 0,
 			 0, 0, 0, 0]);
 
-		boardsEqual(source.move(Direction.UP), destination);
+		boardsEqual(source.move(Direction.UP).board, destination);
 	});
 
 	it('handles UP properly (2, 4, 0, 4).', function() {
@@ -115,7 +131,7 @@ describe('board', function() {
 			 0, 0, 0, 0,
 			 0, 0, 0, 0]);
 
-		boardsEqual(source.move(Direction.UP), destination);
+		boardsEqual(source.move(Direction.UP).board, destination);
 	});
 
 	it('handles DOWN properly (just move tiles).', function() {
@@ -131,7 +147,7 @@ describe('board', function() {
 			 0, 0, 0, 0,
 			 2, 2, 2, 2]);
 
-		boardsEqual(source.move(Direction.DOWN), destination);
+		boardsEqual(source.move(Direction.DOWN).board, destination);
 	});
 
 	it('handles DOWN properly (combinations).', function() {
@@ -147,7 +163,7 @@ describe('board', function() {
 			 4, 4, 0, 0,
 			 4, 2, 4, 2]);
 
-		boardsEqual(source.move(Direction.DOWN), destination);
+		boardsEqual(source.move(Direction.DOWN).board, destination);
 	});
 
 	it('handles LEFT properly (just move tiles).', function() {
@@ -163,7 +179,7 @@ describe('board', function() {
 			 2, 0, 0, 0,
 			 2, 0, 0, 0]);
 
-		boardsEqual(source.move(Direction.LEFT), destination);
+		boardsEqual(source.move(Direction.LEFT).board, destination);
 	});
 
 	it('handles LEFT properly (combinations).', function() {
@@ -179,7 +195,7 @@ describe('board', function() {
 			 2, 4, 2, 0,
 			 4, 2, 0, 0]);
 
-		boardsEqual(source.move(Direction.LEFT), destination);
+		boardsEqual(source.move(Direction.LEFT).board, destination);
 	});
 
 	it('handles RIGHT properly (just move tiles).', function() {
@@ -195,7 +211,7 @@ describe('board', function() {
 			 0, 0, 0, 2,
 			 0, 0, 0, 2]);
 
-		boardsEqual(source.move(Direction.RIGHT), destination);
+		boardsEqual(source.move(Direction.RIGHT).board, destination);
 	});
 
 	it('handles RIGHT properly (combinations).', function() {
@@ -211,6 +227,6 @@ describe('board', function() {
 			 0, 0, 2, 4,
 			 0, 0, 0, 4]);
 
-		boardsEqual(source.move(Direction.RIGHT), destination);
+		boardsEqual(source.move(Direction.RIGHT).board, destination);
 	});
 });
