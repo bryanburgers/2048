@@ -185,4 +185,16 @@ Board.findBlanks = function findBlanks(board) {
 	return blanks;
 };
 
+Board.randomBlank = function randomBlank(board) {
+	var blanks = Board.findBlanks(board);
+	blanks.forEach(function(b) {
+		b.r = Math.random();
+	});
+	blanks.sort(function(a, b) {
+		return a.r - b.r;
+	});
+	delete blanks[0].r;
+	return blanks[0];
+};
+
 module.exports = Board;

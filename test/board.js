@@ -244,4 +244,20 @@ describe('board', function() {
 		blanks.should.containEql({ x: 1, y: 3 });
 		blanks.should.not.containEql({ x: 0, y: 0 });
 	});
+
+	it('chooses a random blank', function() {
+		var source = Board.fromArray(
+			[2, 2, 2, 0,
+			 2, 4, 0, 0,
+			 2, 2, 0, 2,
+			 2, 0, 2, 0]);
+
+		var random = Board.randomBlank(source);
+		var blanks = Board.findBlanks(source);
+
+		random.should.have.property('x');
+		random.should.have.property('y');
+		random.should.not.have.property('r');
+		blanks.should.containEql(random);
+	});
 });
