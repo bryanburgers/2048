@@ -8,6 +8,8 @@ function Board() {
 	                0, 0, 0, 0,
 	                0, 0, 0, 0,
 	                0, 0, 0, 0];
+	this._moveCache = {
+	};
 }
 
 Board.fromArray = function(values) {
@@ -44,13 +46,21 @@ Board.prototype._put = function _put(x, y, value, values) {
 };
 
 Board.prototype.move = function move(direction) {
+	if (this._moveCache[direction]) {
+		return this._moveCache[direction];
+	}
+
 	switch (direction) {
 		case Direction.UP:
 		case Direction.DOWN:
-			return this._moveVertical(direction);
+			var result = this._moveVertical(direction);
+			this._moveCache[direction] = result;
+			return result;
 		case Direction.LEFT:
 		case Direction.RIGHT:
-			return this._moveHorizontal(direction);
+			var result = this._moveHorizontal(direction);
+			this._moveCache[direction] = result;
+			return result;
 		default:
 			throw new Error("Unknown direction: " + direction);
 	}
