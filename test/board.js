@@ -229,4 +229,19 @@ describe('board', function() {
 
 		boardsEqual(source.move(Direction.RIGHT).board, destination);
 	});
+
+	it('finds blanks', function() {
+		var source = Board.fromArray(
+			[2, 2, 2, 0,
+			 2, 4, 0, 0,
+			 2, 2, 0, 2,
+			 2, 0, 2, 0]);
+
+		var blanks = Board.findBlanks(source);
+
+		assert(blanks.length === 6, "Correct number of blanks returned");
+		blanks.should.containEql({ x: 3, y: 0 });
+		blanks.should.containEql({ x: 1, y: 3 });
+		blanks.should.not.containEql({ x: 0, y: 0 });
+	});
 });

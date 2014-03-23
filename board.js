@@ -156,4 +156,33 @@ Board.prototype._moveHorizontal = function(direction) {
 	};
 };
 
+Board.prototype.toString = function toString() {
+	var s = '';
+	for (var y = 0; y <= 3; y++) {
+		if (y > 0) {
+			s += '\n';
+		}
+
+		for (var x = 0; x <= 3; x++) {
+			if (x > 0) {
+				s += ' | ';
+			}
+			s += this.get(x, y);
+		}
+	}
+	return s;
+};
+
+Board.findBlanks = function findBlanks(board) {
+	var blanks = [];
+	for (var y = 0; y <= 3; y++) {
+		for (var x = 0; x <= 3; x++) {
+			if (board.get(x, y) === 0) {
+				blanks.push({ x: x, y: y });
+			}
+		}
+	}
+	return blanks;
+};
+
 module.exports = Board;
