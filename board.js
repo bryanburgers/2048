@@ -63,13 +63,13 @@ Board.prototype._moveVertical = function(direction) {
 	var incrementY = 1;
 	var defaultLastY = 0;
 	var points = 0;
+	var moved = false;
 
 	if (direction === Direction.DOWN) {
 		startY = 2;
 		incrementY = -1;
 		defaultLastY = 3;
 	}
-
 
 	for (var x = 0; x <= 3; x++) {
 		var lastY = defaultLastY;
@@ -84,11 +84,13 @@ Board.prototype._moveVertical = function(direction) {
 				continue;
 			}
 			if (compare === 0) {
+				moved = true;
 				this._put(x, lastY, val, newValues);
 				this._put(x, y, 0, newValues);
 			}
 			else if (val === compare) {
 				points += val + val;
+				moved = true;
 				this._put(x, lastY, val + val, newValues);
 				this._put(x, y, 0, newValues);
 				lastY += incrementY;
@@ -102,7 +104,8 @@ Board.prototype._moveVertical = function(direction) {
 
 	return {
 		board: this._createFromArray(newValues),
-		points: points
+		points: points,
+		moved: moved
 	};
 };
 
@@ -113,6 +116,7 @@ Board.prototype._moveHorizontal = function(direction) {
 	var incrementX = 1;
 	var defaultLastX = 0;
 	var points = 0;
+	var moved = false;
 
 	if (direction === Direction.RIGHT) {
 		startX = 2;
@@ -134,11 +138,13 @@ Board.prototype._moveHorizontal = function(direction) {
 				continue;
 			}
 			if (compare === 0) {
+				moved = true;
 				this._put(lastX, y, val, newValues);
 				this._put(x, y, 0, newValues);
 			}
 			else if (val === compare) {
 				points += val + val;
+				moved = true;
 				this._put(lastX, y, val + val, newValues);
 				this._put(x, y, 0, newValues);
 				lastX += incrementX;
@@ -152,8 +158,14 @@ Board.prototype._moveHorizontal = function(direction) {
 
 	return {
 		board: this._createFromArray(newValues),
-		points: points
+		points: points,
+		moved: moved
 	};
+};
+
+Board.prototype.canMove = function canMove(direction) {
+	var result = this.move(direction);
+	return result.moved;
 };
 
 Board.prototype.toString = function toString() {

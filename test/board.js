@@ -54,180 +54,226 @@ describe('board', function() {
 		board.get(3, 3).should.eql(8);
 	});
 
-	it('handles UP properly (just move tiles).', function() {
-		var source = Board.fromArray(
-			[2, 0, 0, 0,
-			 0, 0, 0, 2,
-			 0, 2, 0, 0,
-			 0, 0, 2, 0]);
+	describe('move', function() {
 
-		var destination = Board.fromArray(
-			[2, 2, 2, 2,
-			 0, 0, 0, 0,
-			 0, 0, 0, 0,
-			 0, 0, 0, 0]);
+		it('handles UP properly (just move tiles).', function() {
+			var source = Board.fromArray(
+				[2, 0, 0, 0,
+				 0, 0, 0, 2,
+				 0, 2, 0, 0,
+				 0, 0, 2, 0]);
 
-		boardsEqual(source.move(Direction.UP).board, destination);
+			var destination = Board.fromArray(
+				[2, 2, 2, 2,
+				 0, 0, 0, 0,
+				 0, 0, 0, 0,
+				 0, 0, 0, 0]);
+
+			boardsEqual(source.move(Direction.UP).board, destination);
+		});
+
+		it('handles UP properly (combinations).', function() {
+			var source = Board.fromArray(
+				[2, 0, 2, 0,
+				 2, 2, 0, 0,
+				 2, 4, 0, 2,
+				 2, 2, 2, 0]);
+
+			var destination = Board.fromArray(
+				[4, 2, 4, 2,
+				 4, 4, 0, 0,
+				 0, 2, 0, 0,
+				 0, 0, 0, 0]);
+
+			boardsEqual(source.move(Direction.UP).board, destination);
+		});
+
+		it('handles UP properly (points).', function() {
+			var source = Board.fromArray(
+				[2, 0, 2, 0,
+				 2, 2, 0, 0,
+				 2, 4, 0, 2,
+				 2, 2, 2, 0]);
+
+			var destination = Board.fromArray(
+				[4, 2, 4, 2,
+				 4, 4, 0, 0,
+				 0, 2, 0, 0,
+				 0, 0, 0, 0]);
+
+			assert(source.move(Direction.UP).points === 12, "Points are calculated correctly.");
+		});
+
+		it('handles UP properly (2, 4, 0, 2).', function() {
+			var source = Board.fromArray(
+				[2, 0, 0, 0,
+				 4, 0, 0, 0,
+				 0, 0, 0, 0,
+				 2, 0, 0, 0]);
+
+			var destination = Board.fromArray(
+				[2, 0, 0, 0,
+				 4, 0, 0, 0,
+				 2, 0, 0, 0,
+				 0, 0, 0, 0]);
+
+			boardsEqual(source.move(Direction.UP).board, destination);
+		});
+
+		it('handles UP properly (2, 4, 0, 4).', function() {
+			var source = Board.fromArray(
+				[2, 0, 0, 0,
+				 4, 0, 0, 0,
+				 0, 0, 0, 0,
+				 4, 0, 0, 0]);
+
+			var destination = Board.fromArray(
+				[2, 0, 0, 0,
+				 8, 0, 0, 0,
+				 0, 0, 0, 0,
+				 0, 0, 0, 0]);
+
+			boardsEqual(source.move(Direction.UP).board, destination);
+		});
+
+		it('handles DOWN properly (just move tiles).', function() {
+			var source = Board.fromArray(
+				[2, 0, 0, 0,
+				 0, 0, 0, 2,
+				 0, 2, 0, 0,
+				 0, 0, 2, 0]);
+
+			var destination = Board.fromArray(
+				[0, 0, 0, 0,
+				 0, 0, 0, 0,
+				 0, 0, 0, 0,
+				 2, 2, 2, 2]);
+
+			boardsEqual(source.move(Direction.DOWN).board, destination);
+		});
+
+		it('handles DOWN properly (combinations).', function() {
+			var source = Board.fromArray(
+				[2, 2, 2, 0,
+				 2, 4, 0, 0,
+				 2, 2, 0, 2,
+				 2, 0, 2, 0]);
+
+			var destination = Board.fromArray(
+				[0, 0, 0, 0,
+				 0, 2, 0, 0,
+				 4, 4, 0, 0,
+				 4, 2, 4, 2]);
+
+			boardsEqual(source.move(Direction.DOWN).board, destination);
+		});
+
+		it('handles LEFT properly (just move tiles).', function() {
+			var source = Board.fromArray(
+				[2, 0, 0, 0,
+				 0, 0, 0, 2,
+				 0, 2, 0, 0,
+				 0, 0, 2, 0]);
+
+			var destination = Board.fromArray(
+				[2, 0, 0, 0,
+				 2, 0, 0, 0,
+				 2, 0, 0, 0,
+				 2, 0, 0, 0]);
+
+			boardsEqual(source.move(Direction.LEFT).board, destination);
+		});
+
+		it('handles LEFT properly (combinations).', function() {
+			var source = Board.fromArray(
+				[2, 0, 2, 0,
+				 2, 2, 0, 0,
+				 2, 4, 0, 2,
+				 2, 2, 2, 0]);
+
+			var destination = Board.fromArray(
+				[4, 0, 0, 0,
+				 4, 0, 0, 0,
+				 2, 4, 2, 0,
+				 4, 2, 0, 0]);
+
+			boardsEqual(source.move(Direction.LEFT).board, destination);
+		});
+
+		it('handles RIGHT properly (just move tiles).', function() {
+			var source = Board.fromArray(
+				[2, 0, 0, 0,
+				 0, 0, 0, 2,
+				 0, 2, 0, 0,
+				 0, 0, 2, 0]);
+
+			var destination = Board.fromArray(
+				[0, 0, 0, 2,
+				 0, 0, 0, 2,
+				 0, 0, 0, 2,
+				 0, 0, 0, 2]);
+
+			boardsEqual(source.move(Direction.RIGHT).board, destination);
+		});
+
+		it('handles RIGHT properly (combinations).', function() {
+			var source = Board.fromArray(
+				[2, 2, 2, 0,
+				 2, 4, 0, 0,
+				 2, 2, 0, 2,
+				 2, 0, 2, 0]);
+
+			var destination = Board.fromArray(
+				[0, 0, 2, 4,
+				 0, 0, 2, 4,
+				 0, 0, 2, 4,
+				 0, 0, 0, 4]);
+
+			boardsEqual(source.move(Direction.RIGHT).board, destination);
+		});
+
 	});
 
-	it('handles UP properly (combinations).', function() {
-		var source = Board.fromArray(
-			[2, 0, 2, 0,
-			 2, 2, 0, 0,
-			 2, 4, 0, 2,
-			 2, 2, 2, 0]);
+	describe('canMove', function() {
 
-		var destination = Board.fromArray(
-			[4, 2, 4, 2,
-			 4, 4, 0, 0,
-			 0, 2, 0, 0,
-			 0, 0, 0, 0]);
+		it('handles true case properly (just move tiles).', function() {
+			var source = Board.fromArray(
+				[2, 0, 0, 0,
+				 0, 0, 0, 2,
+				 0, 2, 0, 0,
+				 0, 0, 2, 0]);
 
-		boardsEqual(source.move(Direction.UP).board, destination);
-	});
+			var destination = Board.fromArray(
+				[2, 2, 2, 2,
+				 0, 0, 0, 0,
+				 0, 0, 0, 0,
+				 0, 0, 0, 0]);
 
-	it('handles UP properly (points).', function() {
-		var source = Board.fromArray(
-			[2, 0, 2, 0,
-			 2, 2, 0, 0,
-			 2, 4, 0, 2,
-			 2, 2, 2, 0]);
+			var canMove = source.canMove(Direction.UP);
+			canMove.should.equal(true);
+		});
 
-		var destination = Board.fromArray(
-			[4, 2, 4, 2,
-			 4, 4, 0, 0,
-			 0, 2, 0, 0,
-			 0, 0, 0, 0]);
+		it('handles true case properly (combinations).', function() {
+			var source = Board.fromArray(
+				[2, 0, 2, 0,
+				 2, 2, 0, 0,
+				 2, 4, 0, 2,
+				 2, 2, 2, 0]);
 
-		assert(source.move(Direction.UP).points === 12, "Points are calculated correctly.");
-	});
+			var canMove = source.canMove(Direction.UP);
+			canMove.should.equal(true);
+		});
 
-	it('handles UP properly (2, 4, 0, 2).', function() {
-		var source = Board.fromArray(
-			[2, 0, 0, 0,
-			 4, 0, 0, 0,
-			 0, 0, 0, 0,
-			 2, 0, 0, 0]);
+		it('handles false case properly.', function() {
+			var source = Board.fromArray(
+				[4, 2, 0, 2,
+				 0, 4, 0, 0,
+				 0, 2, 0, 0,
+				 0, 0, 0, 0]);
 
-		var destination = Board.fromArray(
-			[2, 0, 0, 0,
-			 4, 0, 0, 0,
-			 2, 0, 0, 0,
-			 0, 0, 0, 0]);
-
-		boardsEqual(source.move(Direction.UP).board, destination);
-	});
-
-	it('handles UP properly (2, 4, 0, 4).', function() {
-		var source = Board.fromArray(
-			[2, 0, 0, 0,
-			 4, 0, 0, 0,
-			 0, 0, 0, 0,
-			 4, 0, 0, 0]);
-
-		var destination = Board.fromArray(
-			[2, 0, 0, 0,
-			 8, 0, 0, 0,
-			 0, 0, 0, 0,
-			 0, 0, 0, 0]);
-
-		boardsEqual(source.move(Direction.UP).board, destination);
-	});
-
-	it('handles DOWN properly (just move tiles).', function() {
-		var source = Board.fromArray(
-			[2, 0, 0, 0,
-			 0, 0, 0, 2,
-			 0, 2, 0, 0,
-			 0, 0, 2, 0]);
-
-		var destination = Board.fromArray(
-			[0, 0, 0, 0,
-			 0, 0, 0, 0,
-			 0, 0, 0, 0,
-			 2, 2, 2, 2]);
-
-		boardsEqual(source.move(Direction.DOWN).board, destination);
-	});
-
-	it('handles DOWN properly (combinations).', function() {
-		var source = Board.fromArray(
-			[2, 2, 2, 0,
-			 2, 4, 0, 0,
-			 2, 2, 0, 2,
-			 2, 0, 2, 0]);
-
-		var destination = Board.fromArray(
-			[0, 0, 0, 0,
-			 0, 2, 0, 0,
-			 4, 4, 0, 0,
-			 4, 2, 4, 2]);
-
-		boardsEqual(source.move(Direction.DOWN).board, destination);
-	});
-
-	it('handles LEFT properly (just move tiles).', function() {
-		var source = Board.fromArray(
-			[2, 0, 0, 0,
-			 0, 0, 0, 2,
-			 0, 2, 0, 0,
-			 0, 0, 2, 0]);
-
-		var destination = Board.fromArray(
-			[2, 0, 0, 0,
-			 2, 0, 0, 0,
-			 2, 0, 0, 0,
-			 2, 0, 0, 0]);
-
-		boardsEqual(source.move(Direction.LEFT).board, destination);
-	});
-
-	it('handles LEFT properly (combinations).', function() {
-		var source = Board.fromArray(
-			[2, 0, 2, 0,
-			 2, 2, 0, 0,
-			 2, 4, 0, 2,
-			 2, 2, 2, 0]);
-
-		var destination = Board.fromArray(
-			[4, 0, 0, 0,
-			 4, 0, 0, 0,
-			 2, 4, 2, 0,
-			 4, 2, 0, 0]);
-
-		boardsEqual(source.move(Direction.LEFT).board, destination);
-	});
-
-	it('handles RIGHT properly (just move tiles).', function() {
-		var source = Board.fromArray(
-			[2, 0, 0, 0,
-			 0, 0, 0, 2,
-			 0, 2, 0, 0,
-			 0, 0, 2, 0]);
-
-		var destination = Board.fromArray(
-			[0, 0, 0, 2,
-			 0, 0, 0, 2,
-			 0, 0, 0, 2,
-			 0, 0, 0, 2]);
-
-		boardsEqual(source.move(Direction.RIGHT).board, destination);
-	});
-
-	it('handles RIGHT properly (combinations).', function() {
-		var source = Board.fromArray(
-			[2, 2, 2, 0,
-			 2, 4, 0, 0,
-			 2, 2, 0, 2,
-			 2, 0, 2, 0]);
-
-		var destination = Board.fromArray(
-			[0, 0, 2, 4,
-			 0, 0, 2, 4,
-			 0, 0, 2, 4,
-			 0, 0, 0, 4]);
-
-		boardsEqual(source.move(Direction.RIGHT).board, destination);
+			var canMove = source.canMove(Direction.UP);
+			canMove.should.equal(false);
+		});
 	});
 
 	it('finds blanks', function() {
