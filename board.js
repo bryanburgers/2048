@@ -219,4 +219,9 @@ Board.randomBlank = function randomBlank(board) {
 	return blanks[0];
 };
 
+Board.empty = Board.fromArray([0, 0, 0, 0,
+	0, 0, 0, 0,
+	0, 0, 0, 0,
+	0, 0, 0, 0]);
+
 module.exports = Board;
