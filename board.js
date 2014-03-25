@@ -226,6 +226,18 @@ Board.randomBlank = function randomBlank(board) {
 	return blanks[0];
 };
 
+Board.findMaximumValue = function findMaximumValue(board) {
+	var max = 0;
+
+	for (var x = 0; x <= 3; x++) {
+		for (var y = 0; y <= 3; y++) {
+			max = Math.max(max, board.get(x, y));
+		}
+	}
+
+	return max;
+};
+
 Board.empty = Board.fromArray([0, 0, 0, 0,
 	0, 0, 0, 0,
 	0, 0, 0, 0,

@@ -306,4 +306,16 @@ describe('board', function() {
 		random.should.not.have.property('r');
 		blanks.should.containEql(random);
 	});
+
+	it('returns the largest tile', function() {
+		var source = Board.fromArray(
+			[0, 0, 0, 2,
+			 4, 8, 0, 16,
+			 16, 2, 8, 4,
+			 0, 0, 0, 2]);
+
+		var largestNumber = Board.findMaximumValue(source);
+
+		largestNumber.should.eql(16);
+	});
 });

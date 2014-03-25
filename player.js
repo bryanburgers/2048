@@ -201,12 +201,7 @@ Player.corner = Player.create(2, function evaluateCorner(moveResult) {
 		}
 	}
 
-	var totalMax = 0;
-	for (var x = 0; x <= 3; x++) {
-		for (var y = 0; y <= 3; y++) {
-			totalMax = Math.max(totalMax, board.get(x, y));
-		}
-	}
+	var totalMax = Board.findMaximumValue(board);
 
 	if (totalMax === board.get(0, 0)
 		|| totalMax === board.get(0, 3)
