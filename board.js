@@ -186,11 +186,18 @@ Board.prototype.toString = function toString() {
 		}
 
 		for (var x = 0; x <= 3; x++) {
-			if (x > 0) {
-				s += ' | ';
+			s += ' | ';
+			var val = this.get(x, y).toString();
+			if (val === '0') {
+				val = ' ';
 			}
-			s += this.get(x, y);
+			while (val.length < 5) {
+				val = ' ' + val;
+			}
+			s += val;
 		}
+
+		s += ' |';
 	}
 	return s;
 };
