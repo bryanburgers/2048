@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "description": "A solver for the game 2048",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "mocha test"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:bryanburgers/twentyfortyeight"
+    "url": "git@github.com:bryanburgers/2048"
   },
   "keywords": [
     "2048",
@@ -17,12 +18,12 @@
   "author": "Bryan Burgers <bryan@burgers.io> (http://burgers.io)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bryanburgers/twentyfortyeight/issues"
+    "url": "https://github.com/bryanburgers/2048/issues"
   },
-  "homepage": "https://github.com/bryanburgers/twentyfortyeight",
+  "homepage": "https://github.com/bryanburgers/2048",
   "devDependencies": {
     "mocha": "^1.18.2",
-    "should": "^3.2.0-beta1"
+    "should": "^3.2.0"
   },
   "dependencies": {
     "q": "^1.0.1"
