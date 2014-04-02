@@ -114,4 +114,34 @@ describe('game', function() {
 			done();
 		});
 	});
+
+	it('starts the game with exactly two tiles filled', function(done) {
+		var player = {
+			requestMove: function(board, callback) {
+				Board.findBlanks(board).length.should.eql(14);
+				done();
+			}
+		};
+
+		var game = new Game(player);
+		game.start();
+	});
+
+	it('starts the game with the board given', function(done) {
+		var originalBoard = Board.fromArray([
+			0, 0, 0, 0,
+			2, 4, 0, 0,
+			0, 0, 0, 2,
+			0, 0, 0, 0]);
+
+		var player = {
+			requestMove: function(board, callback) {
+				assert(originalBoard === board, "The first board should be the board that was given to the game");
+				done();
+			}
+		};
+
+		var game = new Game(player, originalBoard);
+		game.start();
+	});
 });

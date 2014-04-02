@@ -37,17 +37,6 @@ Game.prototype._placeRandomTile = function _placeRandomTile() {
 Game.prototype._perform = function _perform() {
 	var self = this;
 
-	self._placeRandomTile();
-
-	if (!self.board.canMove(Direction.UP)
-		&& !self.board.canMove(Direction.DOWN)
-		&& !self.board.canMove(Direction.LEFT)
-		&& !self.board.canMove(Direction.RIGHT)) {
-
-		self._endGame();
-		return;
-	}
-
 	setTimeout(function() {
 		self.player.requestMove(self.board, function(err, direction) {
 			if (err) {
@@ -63,6 +52,18 @@ Game.prototype._perform = function _perform() {
 				board: self.board,
 				points: self.points
 			});
+
+			self._placeRandomTile();
+
+			if (!self.board.canMove(Direction.UP)
+				&& !self.board.canMove(Direction.DOWN)
+				&& !self.board.canMove(Direction.LEFT)
+				&& !self.board.canMove(Direction.RIGHT)) {
+
+				self._endGame();
+				return;
+			}
+
 			self._perform();
 		});
 	}, 0);
