@@ -12,7 +12,7 @@ function Board() {
 	};
 }
 
-Board.fromArray = function(values) {
+exports.fromArray = function(values) {
 	assert(values.length === 16, "Number of values in the array equals 16");
 
 	var board = new Board();
@@ -202,7 +202,7 @@ Board.prototype.toString = function toString() {
 	return s;
 };
 
-Board.findBlanks = function findBlanks(board) {
+exports.findBlanks = function findBlanks(board) {
 	var blanks = [];
 	for (var y = 0; y <= 3; y++) {
 		for (var x = 0; x <= 3; x++) {
@@ -214,8 +214,8 @@ Board.findBlanks = function findBlanks(board) {
 	return blanks;
 };
 
-Board.randomBlank = function randomBlank(board) {
-	var blanks = Board.findBlanks(board);
+exports.randomBlank = function randomBlank(board) {
+	var blanks = exports.findBlanks(board);
 	blanks.forEach(function(b) {
 		b.r = Math.random();
 	});
@@ -226,7 +226,7 @@ Board.randomBlank = function randomBlank(board) {
 	return blanks[0];
 };
 
-Board.findMaximumValue = function findMaximumValue(board) {
+exports.findMaximumValue = function findMaximumValue(board) {
 	var max = 0;
 
 	for (var x = 0; x <= 3; x++) {
@@ -238,9 +238,7 @@ Board.findMaximumValue = function findMaximumValue(board) {
 	return max;
 };
 
-Board.empty = Board.fromArray([0, 0, 0, 0,
+exports.empty = exports.fromArray([0, 0, 0, 0,
 	0, 0, 0, 0,
 	0, 0, 0, 0,
 	0, 0, 0, 0]);
-
-module.exports = Board;

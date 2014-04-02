@@ -27,7 +27,7 @@ function boardsEqual(board1, board2, prefix) {
 
 describe('board', function() {
 	it('create a new board and handle the full sized board.', function() {
-		var board = new Board();
+		var board = Board.empty;
 		board.get(0, 0).should.eql(0);
 		board.get(0, 3).should.eql(0);
 		board.get(3, 0).should.eql(0);
@@ -35,7 +35,7 @@ describe('board', function() {
 	});
 
 	it('handles sets properly.', function() {
-		var board = new Board().set(0, 0, 2).set(0, 3, 4).set(3, 3, 8);
+		var board = Board.empty.set(0, 0, 2).set(0, 3, 4).set(3, 3, 8);
 		board.get(0, 0).should.eql(2);
 		board.get(0, 3).should.eql(4);
 		board.get(3, 0).should.eql(0);
